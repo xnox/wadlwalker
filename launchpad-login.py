@@ -1,5 +1,5 @@
 client_key="wadlwalker"
-request_token_url='https://launchpad.net/+reque2st-token'
+request_token_url='https://launchpad.net/+request-token'
 base_authorization_url = 'https://launchpad.net/+authorize-token'
 access_token_url = 'https://launchpad.net/+access-token'
 import oauthlib
