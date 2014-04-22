@@ -1,4 +1,4 @@
-client_key="wadlwalker"
+client_key="System-wide: Ubuntu (wadlwalker)"
 request_token_url='https://launchpad.net/+request-token'
 base_authorization_url = 'https://launchpad.net/+authorize-token'
 access_token_url = 'https://launchpad.net/+access-token'
@@ -9,7 +9,7 @@ oauth = OAuth1Session(client_key, signature_method=oauthlib.oauth1.SIGNATURE_PLA
 fetch_response = oauth.fetch_request_token(request_token_url)
 resource_owner_key = fetch_response.get('oauth_token')
 resource_owner_secret = fetch_response.get('oauth_token_secret')
-authorization_url = oauth.authorization_url(base_authorization_url)
+authorization_url = oauth.authorization_url(base_authorization_url) +'&allow_permission=DESKTOP_INTEGRATION'
 print('Please go here and authorize,', authorization_url)
 input('Press enter, when done.')
 # Step 1: use signature_type='body'
