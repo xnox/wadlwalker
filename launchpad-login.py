@@ -5,7 +5,7 @@ access_token_url = 'https://launchpad.net/+access-token'
 import oauthlib
 import requests
 from requests_oauthlib import OAuth1Session
-oauth = OAuth1Session(client_key, signature_method=oauthlib.oauth1.SIGNATURE_PLAINTEXT)
+oauth = OAuth1Session(client_key, signature_method=oauthlib.oauth1.SIGNATURE_PLAINTEXT, signature_type='body')
 fetch_response = oauth.fetch_request_token(request_token_url)
 resource_owner_key = fetch_response.get('oauth_token')
 resource_owner_secret = fetch_response.get('oauth_token_secret')
@@ -20,8 +20,7 @@ oauth = OAuth1Session(
     resource_owner_key=resource_owner_key,
     resource_owner_secret=resource_owner_secret,
     signature_method=oauthlib.oauth1.SIGNATURE_PLAINTEXT,
-    signature_type='body')
-from oauthlib.common import urldecode
-token=dict(urldecode(oauth.post(access_token_url, headers={'Content-Type':'application/x-www-form-urlencoded'}).text))
-print('oauth_token="%s"' % token['oauth_token'])
-print('oauth_token_secret="%s"' % token['oauth_token_secret'])
+    signature_type='body',
+    verifier='unused')
+oauth_tokens = oauth.fetch_access_token(access_token_url)
+print(oauth_tokens)
